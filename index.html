@@ -8,16 +8,19 @@
     <link rel="stylesheet" href="./assets/css/styles.css" />
   </head>
   <body>
-    <form action="" onsubmit="return false">
-      <label for="city">City</label>
-      <input type="text" name="" id="city" />
-      <button class="weather">Wetter</button>
-      <button class="refresh">Refresh</button>
-    </form>
-    <section id="section">
-      <article></article>
-      <table></table>
-    </section>
+    <main class="card">
+      <div class="header">
+        <section class="request-section">
+          <input type="text" name="" id="city" placeholder="... Type A City" />
+          <button class="weather">Wetter</button>
+          <button class="refresh">Refresh</button>
+        </section>
+        <section class="weather-table">
+          <article></article>
+          <table></table>
+        </section>
+      </div>
+    </main>
     <script src="./assets/js/main.js"></script>
   </body>
 </html>
