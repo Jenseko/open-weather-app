@@ -1,15 +1,21 @@
+"use strict";
+
+const btnStart = document.querySelector(".weather");
+const btnRefresh = document.querySelector(".refresh");
+const article = document.querySelector("article");
+
 // Get the button of the html element and add a 'click' event listener to the object
-const buttonStart = document.querySelector(".weather");
-buttonStart.addEventListener("click", getWeatherData);
+
+btnStart.addEventListener("click", getWeatherData);
 
 // Button for reloading webpage and add of event listener 'click' to the page
-const buttonRefresh = document.querySelector(".refresh");
-buttonRefresh.addEventListener("click", refreshPage);
+
+btnRefresh.addEventListener("click", refreshPage);
 
 // Define the function for the API request
 function getWeatherData() {
   // Get article element for check of text content
-  const article = document.querySelector("article");
+
   const textContentArticle = article.textContent;
 
   // Check if text content of article is empty. If not do not execute the function
@@ -30,23 +36,24 @@ function getWeatherData() {
 
         // Create array with extracted key-value-pairs for the card body
         const weatherDataHeader = [
-          { Temperature: main.temp.toFixed(1) + "°C" },
+          { Temperature: `${main.temp.toFixed(1)} °C` },
           { Description: weather[0].description },
           { "Data obtained": obtainedTime(dt) },
         ];
 
         // Create array with extracted key-value-pairs for the card header
         const weatherDataBody = [
-          { "Locale Time": localeTime(timezone) },
-          { "Wind Speed": wind.speed + " m/s" },
-          { Cloudiness: clouds.all + " %" },
-          { Pressure: main.pressure + " hpa" },
-          { Humidity: main.humidity + " %" },
-          { Sunrise: convertTime(sys.sunrise) + " Uhr" },
-          { Sunset: convertTime(sys.sunset) + " Uhr" },
+          { "Locale Time": `${localeTime(timezone)}` },
+          { "Wind Speed": `${wind.speed} m/s` },
+          { Cloudiness: `${clouds.all} %` },
+          { Pressure: `${main.pressure} hpa` },
+          { Humidity: `${main.humidity} %` },
+          { Sunrise: `${convertTime(sys.sunrise)} Uhr` },
+          { Sunset: `${convertTime(sys.sunset)} Uhr` },
           {
-            Coordinates:
-              "[" + coord.lon.toFixed(2) + ", " + coord.lat.toFixed(2) + "]",
+            Coordinates: `[ ${coord.lon.toFixed(2)} , ${coord.lat.toFixed(
+              2
+            )} ]`,
           },
         ];
 
@@ -61,7 +68,7 @@ function createHtmlCard(weatherDataHeader, weatherDataBody) {
 
   // Display the data header on the html card
 
-  inputCity = document.getElementById("city").value;
+  let inputCity = document.getElementById("city").value;
 
   const formatInputCity =
     inputCity.slice(0, 1).toUpperCase() + inputCity.slice(1);
@@ -73,12 +80,12 @@ function createHtmlCard(weatherDataHeader, weatherDataBody) {
   });
 
   // Get the table element to fill it with data
-  const tableData = document.querySelector("table");
+  const weatherDataArt = document.querySelector(".grid-container");
   // console.log(tableData);
 
-  // Display the data body inside a table element
+  // Display the data body inside a grid-container
   weatherDataBody.forEach((data) => {
-    tableData.innerHTML += `<p>${Object.keys(data)[0]}</td><p>${
+    weatherDataArt.innerHTML += `<p>${Object.keys(data)[0]} : \n ${
       Object.values(data)[0]
     }</p>`;
   });
@@ -112,13 +119,8 @@ function convertTime(unixTime) {
 function localeTime(timezone) {
   const timeDiffInHours = timezone / 60 / 60;
   const utcTime = new Date();
-  return (
-    utcTime.getUTCHours() +
-    timeDiffInHours +
-    ":" +
-    utcTime.getUTCMinutes() +
-    " Uhr"
-  );
+  return `${utcTime.getUTCHours() + timeDiffInHours} : 
+    ${utcTime.getUTCMinutes()} Uhr`;
 }
 
 // Function for reloading the webpage
