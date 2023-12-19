@@ -1,0 +1,14 @@
+{
+  "name": "open-weater-app",
+  "version": "1.0.0",
+  "description": "Weather App using open-weather-api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jens",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^9.0.0"
+  }
+}
