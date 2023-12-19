@@ -3,6 +3,7 @@
 const btnStart = document.querySelector(".weather");
 const btnRefresh = document.querySelector(".refresh");
 const article = document.querySelector("article");
+const inputCity = document.getElementById("city");
 
 // Get the button of the html element and add a 'click' event listener to the object
 
@@ -14,58 +15,43 @@ btnRefresh.addEventListener("click", refreshPage);
 
 // Define the function for the API request
 async function getWeatherData() {
-  // Get article element for check of text content
+  article.innerHTML = "";
 
-  const textContentArticle = article.textContent;
+  // Call the fetch function to request the desired weather data utilizing the current weather data API of open weather
+  const response = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${inputCity.value}&units=metric&appid=2fa1662c1af641d6fd162fc1fe68f4f5`
+  );
+  const data = await response.json();
+  // Utilizing object destructuring to filter the desired data from the weather API
+  console.log(data);
+  const { main, weather, dt, timezone, wind, clouds, sys, coord } = data;
 
-  // Check if text content of article is empty. If not do not execute the function
-  if (textContentArticle === "") {
-    // Get the city the weather forecast is desired to give it the API
-    const inputCity = document.getElementById("city");
-    // Define an array for the weather data and further editing
-    const weatherDataArr = [];
+  // Create array with extracted key-value-pairs for the card body
+  const weatherDataHeader = [
+    { Temperature: `${main.temp.toFixed(1)} °C` },
+    { Description: weather[0].description },
+    { "Data obtained": obtainedTime(dt) },
+  ];
 
-    // Call the fetch function to request the desired weather data utilizing the current weather data API of open weather
+  // Create array with extracted key-value-pairs for the card header
+  const weatherDataBody = [
+    { "Locale Time": `${localeTime(timezone)}` },
+    { "Wind Speed": `${wind.speed} m/s` },
+    { Cloudiness: `${clouds.all} %` },
+    { Pressure: `${main.pressure} hpa` },
+    { Humidity: `${main.humidity} %` },
+    { Sunrise: `${convertTime(sys.sunrise)} Uhr` },
+    { Sunset: `${convertTime(sys.sunset)} Uhr` },
+    {
+      Coordinates: `[ ${coord.lon.toFixed(2)} , ${coord.lat.toFixed(2)} ]`,
+    },
+  ];
 
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${inputCity.value}&units=metric&appid=2fa1662c1af641d6fd162fc1fe68f4f5`
-    );
-    const data = await response.json();
-    // Utilizing object destructuring to filter the desired data from the weather API
-    console.log(data);
-    const { main, weather, dt, timezone, wind, clouds, sys, coord } = data;
-
-    // Create array with extracted key-value-pairs for the card body
-    const weatherDataHeader = [
-      { Temperature: `${main.temp.toFixed(1)} °C` },
-      { Description: weather[0].description },
-      { "Data obtained": obtainedTime(dt) },
-    ];
-
-    // Create array with extracted key-value-pairs for the card header
-    const weatherDataBody = [
-      { "Locale Time": `${localeTime(timezone)}` },
-      { "Wind Speed": `${wind.speed} m/s` },
-      { Cloudiness: `${clouds.all} %` },
-      { Pressure: `${main.pressure} hpa` },
-      { Humidity: `${main.humidity} %` },
-      { Sunrise: `${convertTime(sys.sunrise)} Uhr` },
-      { Sunset: `${convertTime(sys.sunset)} Uhr` },
-      {
-        Coordinates: `[ ${coord.lon.toFixed(2)} , ${coord.lat.toFixed(2)} ]`,
-      },
-    ];
-
-    createHtmlCard(weatherDataHeader, weatherDataBody);
-  }
+  createHtmlCard(weatherDataHeader, weatherDataBody);
 }
 
 function createHtmlCard(weatherDataHeader, weatherDataBody) {
-  // Get the article element to append the h2 elements by using innerHTML
-  const article = document.querySelector("article");
-
   // Display the data header on the html card
-
   let inputCity = document.getElementById("city").value;
 
   const formatInputCity =
@@ -106,16 +92,24 @@ function obtainedTime(unixTime) {
 // Function to convert the unix time in the european time format
 function convertTime(unixTime) {
   const time = new Date(unixTime * 1000);
-  const newTime = time.getHours() + ":" + time.getMinutes();
+  const hours = time.getHours().toString().padStart(2, 0);
+  const minutes = time.getMinutes().toString().padStart(2, 0);
+  const newTime = `${hours}:${minutes}`;
   return newTime;
 }
 
 // Function to use the timezone data of the open weather API to calculate the local time of the desired city
 function localeTime(timezone) {
-  const timeDiffInHours = timezone / 60 / 60;
+  // const timeDiffInHours = timezone / 60 / 60;
   const utcTime = new Date();
-  return `${utcTime.getUTCHours() + timeDiffInHours} : 
-    ${utcTime.getUTCMinutes()} Uhr`;
+  const hours = utcTime.getHours().toString().padStart(2, 0);
+  const minutes = utcTime.getUTCMinutes().toString().padStart(2, 0);
+
+  if (hours === "24") {
+    return (hours = "0");
+  }
+
+  return `${hours}:${minutes} Uhr`;
 }
 
 // Function for reloading the webpage
