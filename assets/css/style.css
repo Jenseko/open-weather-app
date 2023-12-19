@@ -1,40 +1,24 @@
-@font-face {
-  font-family: "ubuntu-light";
-  src: url("../font/Ubuntu/Ubuntu-Light.ttf"); }
-
-@font-face {
-  font-family: "ubuntu-medium";
-  src: url("../font/Ubuntu/Ubuntu-Medium.ttf"); }
-
-@font-face {
-  font-family: "ubuntu-regular";
-  src: url("../font/Ubuntu/Ubuntu-Regular.ttf"); }
-
 *,
 *::before,
 *::after {
-  box-sizing: border-box; }
-
-* {
   margin: 0;
   padding: 0;
-  font: inherit; }
-
-html {
-  font-size: 1rem;
-  font-family: ubuntu-regular; }
-
-html:focus-within {
-  scroll-behavior: smooth; }
+  box-sizing: inherit; }
 
 html,
-body {
-  height: 100%;
-  width: 100%;
-  color: #fff; }
+html:focus-within {
+  font-size: 62, 5%;
+  scroll-behavior: smooth; }
 
 body {
-  line-height: 1.5; }
+  font-family: "Lato", sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #271d4e;
+  padding: 3rem;
+  box-sizing: border-box;
+  background-color: #64379f; }
 
 img {
   max-width: 100%;
@@ -42,42 +26,44 @@ img {
 
 /* --- Header --- */
 .card {
-  width: 50%;
+  width: 70%;
   margin: 10vh auto; }
 
 .header {
-  background-color: #64379f;
-  padding-block: 1.5rem;
-  border-radius: 10px;
-  border: 1px solid black; }
+  background-color: #fff;
+  padding-block: 2.5rem;
+  border-radius: 50px; }
 
 .request-section {
   display: flex;
   justify-content: center;
-  border-radius: 10px;
-  padding: 0; }
+  border-radius: 100px; }
 
 .request-section :is(label, input, button) {
-  color: white;
-  font-size: 1.2rem; }
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 0.5rem; }
 
 .request-section input[type="text"] {
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  border: 1px solid white;
+  border: 1px solid #fff;
   padding-left: 1rem;
-  color: #d80e0e; }
+  color: #fff;
+  background-color: #d3d3d3; }
 
 .request-section button {
   padding-inline: 1.5rem;
   margin-right: 0;
-  border: 1px solid white;
-  background-color: #464646; }
+  border: 1px solid #fff;
+  background-color: #64379f; }
 
 .request-section button:nth-of-type(2) {
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
-  border: 1px solid white; }
+  color: #64379f;
+  border: 1px solid #fff;
+  background-color: #d3d3d3; }
 
 /* --- Card Body --- */
 .card-body {
@@ -85,20 +71,19 @@ img {
   text-align: center; }
 
 .card-body h2 {
-  margin-block: 1rem; }
+  margin-block: 1rem;
+  text-transform: capitalize;
+  color: #271d4e; }
 
 .card-body h2:nth-of-type(1) {
-  font-size: 3rem;
-  text-transform: capitalize; }
+  font-size: 3rem; }
 
 .card-body h2:nth-of-type(2) {
-  font-size: 2rem; }
-
-.card-body h2:nth-of-type(3) {
-  text-transform: capitalize; }
+  font-size: 3.5rem;
+  color: #ddacf5; }
 
 .article-line {
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid #64379f;
   margin-bottom: 1rem; }
 
 /* --- Table --- */
