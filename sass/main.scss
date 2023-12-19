@@ -1,0 +1,134 @@
+@font-face {
+  font-family: "ubuntu-light";
+  src: url("../font/Ubuntu/Ubuntu-Light.ttf");
+}
+
+@font-face {
+  font-family: "ubuntu-medium";
+  src: url("../font/Ubuntu/Ubuntu-Medium.ttf");
+}
+
+@font-face {
+  font-family: "ubuntu-regular";
+  src: url("../font/Ubuntu/Ubuntu-Regular.ttf");
+}
+
+$color-primary: #64379f;
+$color-primary-light: #ddacf5;
+$color-primary-dark: #271d4e;
+$color-white: #fff;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+html {
+  font-size: 1rem;
+  font-family: ubuntu-regular;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  color: $color-white;
+}
+
+body {
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* --- Header --- */
+
+.card {
+  width: 50%;
+  margin: 10vh auto;
+}
+
+.header {
+  background-color: $color-primary;
+  padding-block: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
+.request-section {
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 0;
+}
+
+.request-section :is(label, input, button) {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.request-section input[type="text"] {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border: 1px solid white;
+  padding-left: 1rem;
+  color: rgb(216, 14, 14);
+}
+
+.request-section button {
+  padding-inline: 1.5rem;
+  margin-right: 0;
+  border: 1px solid white;
+  background-color: rgb(70, 70, 70);
+}
+
+.request-section button:nth-of-type(2) {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border: 1px solid white;
+}
+
+/* --- Card Body --- */
+
+.card-body {
+  margin: 4vh 10%;
+  text-align: center;
+}
+
+.card-body h2 {
+  margin-block: 1rem;
+}
+
+.card-body h2:nth-of-type(1) {
+  font-size: 3rem;
+  text-transform: capitalize;
+}
+
+.card-body h2:nth-of-type(2) {
+  font-size: 2rem;
+}
+
+.card-body h2:nth-of-type(3) {
+  text-transform: capitalize;
+}
+
+.article-line {
+  border-bottom: 2px solid white;
+  margin-bottom: 1rem;
+}
+
+/* --- Table --- */
