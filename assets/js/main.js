@@ -78,9 +78,9 @@ function createHtmlCard(weatherDataHeader, weatherDataBody) {
 
   // Display the data body inside a table element
   weatherDataBody.forEach((data) => {
-    tableData.innerHTML += `<tr><td>${Object.keys(data)[0]}</td><td>${
+    tableData.innerHTML += `<p>${Object.keys(data)[0]}</td><p>${
       Object.values(data)[0]
-    }</td></tr>`;
+    }</p>`;
   });
 }
 
