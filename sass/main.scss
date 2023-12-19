@@ -111,11 +111,15 @@ img {
   margin-bottom: 1rem;
 }
 
-/* --- Table --- */
+/* --- grid --- */
 
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 10%;
+  gap: 10%, 5%;
+}
+
+.grid-container p {
+  border: 1px solid $color-primary-dark;
 }
