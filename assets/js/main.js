@@ -10,6 +10,10 @@ const gridWeatherData = document.querySelector(".grid-container");
 btnStart.addEventListener("click", getWeatherData);
 btnRefresh.addEventListener("click", refreshPage);
 
+/////////////////////////////////
+//////// GET WEATHER DATA //////
+////////////////////////////////
+
 async function getWeatherData() {
   article.innerHTML = "";
 
@@ -48,6 +52,10 @@ async function getWeatherData() {
   createHtmlCard(weatherDataHeader, weatherDataBody, iconUrl);
 }
 
+///////////////////////////
+/////// CREATE HTML ///////
+//////////////////////////
+
 function createHtmlCard(headerData, bodyData, iconUrl) {
   // Display the data header on the html card
   let cityName = inputCity.value;
@@ -74,6 +82,10 @@ function createHtmlCard(headerData, bodyData, iconUrl) {
     }</p>`;
   });
 }
+
+/////////////////////////////
+///////// WEATHER ICONS ////////
+////////////////////////////////
 
 async function createWeatherIcon() {
   const iconDescript = [
@@ -139,13 +151,15 @@ async function createWeatherIcon() {
     const iconUrl = URL.createObjectURL(iconBlob);
     console.log(iconUrl);
 
-    const imgElement = document.createElement("img");
-    imgElement.src = iconUrl;
-    article.appendChild(imgElement);
+    return iconUrl;
   } catch (error) {
     console.error("Error fetching weather icon:", error.message);
   }
 }
+
+/////////////////////////////
+//////// TIME FORMATTING //////
+////////////////////////////////
 
 // Function to calculate the obtained time of the data by converting the unix time and convert it into european time format
 function obtainedTime(unixTime) {
